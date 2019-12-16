@@ -2,6 +2,10 @@
   "name": "egg-coca-user-permission",
   "version": "1.0.0",
   "description": "coca 用户权限模块",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rojer95/egg-coca-user-permission.git"
+  },
   "eggPlugin": {
     "name": "cocaUserPermission",
     "dependencies": [
