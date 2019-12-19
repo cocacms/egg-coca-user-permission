@@ -1,4 +1,5 @@
 'use strict';
+const md5 = require('../app/util/md5');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -31,6 +32,17 @@ module.exports = {
       fields: [ 'account' ],
       unique: true,
     });
+
+
+    await queryInterface.bulkInsert('users', [
+      {
+        account:'admin',
+        password: md5(md5('admin') + 'admin'),
+        superadmin: 1,
+        created_at: new Date(),
+        updated_at: new Date()
+      }
+    ])
   },
 
   down: async queryInterface => {
