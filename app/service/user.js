@@ -61,16 +61,8 @@ class UserService extends Serivce {
       ctx.throw('密码不正确');
     }
 
-    return await app.model.User.update(
-      {
-        password: newpassword,
-      },
-      {
-        where: {
-          id: this.ctx.logined.id,
-        },
-      }
-    );
+    this.ctx.logined.password = newpassword;
+    return await this.ctx.logined.save();
   }
 
   /**
