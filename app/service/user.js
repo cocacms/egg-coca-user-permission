@@ -63,7 +63,7 @@ class UserService extends Serivce {
 
     return await app.model.User.update(
       {
-        password: this.app.signPassword(this.ctx.logined.account, newpassword),
+        password: newpassword,
       },
       {
         where: {
