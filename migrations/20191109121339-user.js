@@ -3,7 +3,7 @@ const md5 = require('../app/util/md5');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const { INTEGER, STRING, BOOLEAN, DATE } = Sequelize;
+    const { INTEGER, STRING, BOOLEAN, DATE, ENUM } = Sequelize;
     await queryInterface.createTable('users', {
       id: { type: INTEGER, primaryKey: true, autoIncrement: true },
 
@@ -17,9 +17,10 @@ module.exports = {
         allowNull: false,
       },
 
-      superadmin: {
-        type: BOOLEAN,
-        defaultValue: false,
+      type: {
+        type: ENUM('super', 'admin', 'normal'),
+        allowNull: false,
+        defaultValue: 'normal',
       },
 
       // Timestamps
@@ -33,16 +34,15 @@ module.exports = {
       unique: true,
     });
 
-
     await queryInterface.bulkInsert('users', [
       {
-        account:'admin',
+        account: 'admin',
         password: md5(md5('admin') + 'admin'),
-        superadmin: 1,
+        type: 'super',
         created_at: new Date(),
-        updated_at: new Date()
-      }
-    ])
+        updated_at: new Date(),
+      },
+    ]);
   },
 
   down: async queryInterface => {

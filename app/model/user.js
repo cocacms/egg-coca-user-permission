@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = app => {
-  const { STRING, BOOLEAN } = app.Sequelize;
+  const { STRING, ENUM } = app.Sequelize;
 
   const User = app.model.define(
     'user',
@@ -26,9 +26,10 @@ module.exports = app => {
         },
       },
 
-      superadmin: {
-        type: BOOLEAN,
-        defaultValue: false,
+      type: {
+        type: ENUM('super', 'admin', 'normal'),
+        allowNull: false,
+        defaultValue: 'normal',
       },
     },
     {
