@@ -52,7 +52,7 @@ class UserService extends Serivce {
    * @param {*} newpassword 新密码
    */
   async changePassword(password, newpassword) {
-    const { ctx, app } = this;
+    const { ctx } = this;
 
     if (
       this.ctx.logined.password !==
