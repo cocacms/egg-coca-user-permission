@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = app => {
-  const { STRING, ENUM } = app.Sequelize;
+  const { STRING, ENUM, INTEGER } = app.Sequelize;
 
   const User = app.model.define(
     'user',
@@ -30,6 +30,12 @@ module.exports = app => {
         type: ENUM('super', 'admin', 'normal'),
         allowNull: false,
         defaultValue: 'normal',
+      },
+
+      maxtime: {
+        type: INTEGER,
+        allowNull: false,
+        defaultValue: 0,
       },
     },
     {
