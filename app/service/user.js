@@ -14,13 +14,24 @@ class UserService extends Serivce {
     const isExist = await app.model.User.findOne({
       where: { account },
     });
-    this.app.signPassword(account, password);
-    if (
-      !isExist ||
-      isExist.password !== this.app.signPassword(account, password)
-    ) {
+    // this.app.signPassword(account, password);
+
+    if (!isExist) {
       ctx.throw('用户不存在/密码错误');
     }
+
+    if (isExist.maxtime > 5) {
+      ctx.throw('账号已被锁定');
+    }
+
+    if (isExist.password !== this.app.signPassword(account, password)) {
+      isExist.maxtime++;
+      await isExist.save();
+      ctx.throw('用户不存在/密码错误');
+    }
+
+    isExist.maxtime = 0;
+    await isExist.save();
 
     const config = this.config.userPermimission;
     this.ctx.logined = isExist;

@@ -1,6 +1,6 @@
 {
   "name": "egg-coca-user-permission",
-  "version": "2.0.0-beta.2",
+  "version": "2.0.0-beta.3",
   "description": "coca 用户权限模块",
   "repository": {
     "type": "git",

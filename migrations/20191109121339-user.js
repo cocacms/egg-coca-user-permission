@@ -3,7 +3,7 @@ const md5 = require('../app/util/md5');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const { INTEGER, STRING, BOOLEAN, DATE, ENUM } = Sequelize;
+    const { INTEGER, STRING, DATE, ENUM } = Sequelize;
     await queryInterface.createTable('users', {
       id: { type: INTEGER, primaryKey: true, autoIncrement: true },
 
